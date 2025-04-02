@@ -61,7 +61,7 @@ def log_ip():
     # Отправка в Telegram
     send_to_telegram(log_message)
     
-    return "Добро пожаловать на сайт!"
+    return "с"
 
 
 if __name__ == '__main__':
