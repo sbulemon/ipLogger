@@ -60,7 +60,7 @@
         }
 
         .category:hover {
-            transform: translateY(-5px) rotate(1deg);
+            transform: translateY(-5px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
@@ -92,7 +92,7 @@
         .resource-list.active {
             display: block;
             opacity: 1;
-            max-height: 600px; /* Увеличено для длинных списков */
+            max-height: 600px;
             animation: expandList 0.6s ease-out;
         }
 
@@ -112,7 +112,7 @@
 
         .resource-list li:hover {
             background: rgba(255, 255, 255, 0.15);
-            transform: translateX(10px) rotate(2deg);
+            transform: translateX(10px);
         }
 
         .resource-list li a {
@@ -160,15 +160,6 @@
         @keyframes slideInLeft {
             from { transform: translateX(-50px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes rotateIn {
-            from { transform: rotate(-10deg); opacity: 0; }
-            to { transform: rotate(0); opacity: 1; }
-        }
-
-        .category:nth-child(odd) {
-            animation: rotateIn 0.8s ease-out;
         }
 
         /* Задержка для последовательной анимации элементов списка */
@@ -251,7 +242,7 @@
             <li><a href="https://www.avito.ru/" target="_blank">🛠️ Avito</a></li>
             <li><a href="https://realty.yandex.ru/" target="_blank">💼 Яндекс.Недвижимость</a></li>
             <li><a href="https://www.realtor.ru/" target="_blank">🔑 Риэлтор</a></li>
-            <li><a href="https://realty.mail.ru/" target="_blank">🏠 Недвижимость Mail.ru</a></li>
+            <li><a href="https://realty.mail.ru/" target="_blank">🏠 Nedвижимость Mail.ru</a></li>
         </ul>
     </div>
 
