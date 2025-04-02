@@ -1,5 +1,7 @@
 from flask import Flask, request
 import requests
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
 app = Flask(__name__)
 
@@ -12,8 +14,8 @@ TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 IPINFO_TOKEN = "your_ipinfo_token"
 IPSTACK_TOKEN = "your_ipstack_token"
 
+# Функция получения информации об IP
 def get_ip_info(ip):
-    # Попытка получить информацию с ip-api.com
     try:
         response = requests.get(f"http://ip-api.com/json/{ip}?fields=status,country,regionName,city,zip,lat,lon,isp,org,as,mobile,proxy,hosting,timezone,query")
         data = response.json()
@@ -22,8 +24,7 @@ def get_ip_info(ip):
         return format_ip_info(data)
     except Exception as e:
         print(f"Ошибка с ip-api.com: {e}")
-    
-    # Попытка получить информацию с ipinfo.io
+
     try:
         response = requests.get(f"https://ipinfo.io/{ip}/json?token={IPINFO_TOKEN}")
         data = response.json()
@@ -33,7 +34,6 @@ def get_ip_info(ip):
     except Exception as e:
         print(f"Ошибка с ipinfo.io: {e}")
 
-    # Попытка получить информацию с ipstack.com
     try:
         response = requests.get(f"http://api.ipstack.com/{ip}?access_key={IPSTACK_TOKEN}&fields=country,region_name,city,zip,latitude,longitude,isp,organization,connection_type,timezone")
         data = response.json()
@@ -42,10 +42,10 @@ def get_ip_info(ip):
         return format_ip_info(data)
     except Exception as e:
         print(f"Ошибка с ipstack.com: {e}")
-    
-    # Если все попытки не удались
+
     return f"IP: {ip} (информация недоступна)"
 
+# Функция форматирования данных
 def format_ip_info(data):
     return (f"🔹 IP: {data.get('ip', 'Неизвестно')}\n"
             f"🌍 Страна: {data.get('country', 'Неизвестно')}\n"
@@ -60,6 +60,20 @@ def format_ip_info(data):
             f"🛡 Прокси: {'Да' if data.get('proxy') else 'Нет'}\n"
             f"🏢 Хостинг: {'Да' if data.get('hosting') else 'Нет'}")
 
+# Команда /start
+def start(update: Update, context: CallbackContext):
+    update.message.reply_text("Привет! Я могу предоставить информацию по IP. Используй команду /ip <IP>.")
+
+# Команда /ip <ip>
+def ip_info(update: Update, context: CallbackContext):
+    if context.args:
+        ip = context.args[0]  # Получаем IP из команды
+        ip_info = get_ip_info(ip)
+        update.message.reply_text(ip_info)
+    else:
+        update.message.reply_text("Пожалуйста, укажи IP после команды, например: /ip 8.8.8.8")
+
+# Функция для отправки сообщений в Telegram
 def send_to_telegram(message):
     payload = {"chat_id": CHAT_ID, "text": message, "parse_mode": "Markdown"}
     try:
@@ -67,6 +81,20 @@ def send_to_telegram(message):
     except Exception as e:
         print(f"Ошибка отправки в Telegram: {e}")
 
+# Инициализация бота
+def main():
+    updater = Updater(BOT_TOKEN, use_context=True)
+    dp = updater.dispatcher
+
+    # Добавляем обработчики команд
+    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("ip", ip_info))
+
+    # Запускаем бота
+    updater.start_polling()
+    updater.idle()
+
+# Flask сервер для обработки веб-запросов
 @app.route('/')
 def log_ip():
     user_ip = request.headers.get("X-Forwarded-For", request.remote_addr)  # Учитываем прокси
@@ -92,4 +120,10 @@ def log_ip():
     return "Добро пожаловать на сайт!"
 
 if __name__ == '__main__':
-    app.run(host='0.0.
+    # Запуск Flask сервера в отдельном потоке
+    from threading import Thread
+    flask_thread = Thread(target=app.run, kwargs={'host': '0.0.0.0', 'port': 5000})
+    flask_thread.start()
+
+    # Запуск Telegram-бота
+    main()
