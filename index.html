@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ресурсы</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding-bottom: 40px;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(30, 30, 47, 0.95);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: slideDown 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #bb86fc, #03dac6);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: pulseText 2s infinite alternate, fadeIn 1.5s ease-in-out;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .category {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        .category:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .category h2 {
+            font-size: 1.8em;
+            color: #bb86fc;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .category h2:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 10px 0 0 20px;
+            display: none;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .resource-list.active {
+            display: block;
+            opacity: 1;
+            max-height: 600px; /* Увеличено для длинных списков */
+            animation: expandList 0.6s ease-out;
+        }
+
+        .resource-list li {
+            margin: 12px 0;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+            animation: slideInLeft 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .resource-list.active li {
+            opacity: 1;
+        }
+
+        .resource-list li:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(10px) rotate(2deg);
+        }
+
+        .resource-list li a {
+            text-decoration: none;
+            color: #03dac6;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .resource-list li a:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Анимации */
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseText {
+            from { text-shadow: 0 0 5px #bb86fc; }
+            to { text-shadow: 0 0 15px #03dac6, 0 0 25px #bb86fc; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes expandList {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 600px; }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes rotateIn {
+            from { transform: rotate(-10deg); opacity: 0; }
+            to { transform: rotate(0); opacity: 1; }
+        }
+
+        .category:nth-child(odd) {
+            animation: rotateIn 0.8s ease-out;
+        }
+
+        /* Задержка для последовательной анимации элементов списка */
+        .resource-list li:nth-child(1) { animation-delay: 0.1s; }
+        .resource-list li:nth-child(2) { animation-delay: 0.2s; }
+        .resource-list li:nth-child(3) { animation-delay: 0.3s; }
+        .resource-list li:nth-child(4) { animation-delay: 0.4s; }
+        .resource-list li:nth-child(5) { animation-delay: 0.5s; }
+        .resource-list li:nth-child(6) { animation-delay: 0.6s; }
+        .resource-list li:nth-child(7) { animation-delay: 0.7s; }
+        .resource-list li:nth-child(8) { animation-delay: 0.8s; }
+        .resource-list li:nth-child(9) { animation-delay: 0.9s; }
+        .resource-list li:nth-child(10) { animation-delay: 1s; }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            .category h2 {
+                font-size: 1.5em;
+            }
+            .resource-list li {
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Список Ресурсов</h1>
+</header>
+
+<div class="container">
+    <div class="category">
+        <h2 onclick="toggleList(this)">⚔Основные боты</h2>
+        <ul class="resource-list">
+            <li><a href="https://t.me/Lemonglazb_bot" target="_blank">🗃 ГЛАЗ Бобобра</a></li>
+            <li><a href="https://t.me/FreeSearchbot_bot" target="_blank">🗂 LEAK OSINT</a></li>
+            <li><a href="https://t.me/Skkskdkdkekebot" target="_blank">📦 USER BOX</a></li>
+            <li><a href="https://t.me/Deanon_po_nomery_1bot" target="_blank">🔎 докс</a></li>
+            <li><a href="https://t.me/VKHistoryRobot" target="_blank">📄 ВК история профилей</a></li>
+            <li><a href="https://smsc.ru/testhlr/" target="_blank">📲 HLR запрос</a></li>
+            <li><a href="https://t.me/tgdb_bot" target="_blank">💬 Telegram ID Finder</a></li>
+            <li><a href="https://t.me/WhoisDomBot" target="_blank">🧩 WhoIs</a></li>
+            <li><a href="https://t.me/ProxyMTProto" target="_blank">🔐 proxy</a></li>
+            <li><a href="https://t.me/funstatlemonbot" target="_blank">💠 FUN STAT</a></li>
+        </ul>
+    </div>
+
+    <div class="category">
+        <h2 onclick="toggleList(this)">🔎Анализ IP и логеры</h2>
+        <ul class="resource-list">
+            <li><a href="https://ip-api.com/" target="_blank">📍IP-API</a></li>
+            <li><a href="https://ipinfo.io/" target="_blank">📍IPInfo.io</a></li>
+            <li><a href="https://t.me/ip_score_checker_bot" target="_blank">📍ip_score_checker_bot</a></li>
+            <li><a href="https://t.me/Camera_Hack_PyBot" target="_blank">📷 Взлом камеры</a></li>
+            <li><a href="https://t.me/LetThem_Bot" target="_blank">📷 Взлом камеры2</a></li>
+            <li><a href="https://iplogger.org/ru/" target="_blank">📍 iplogger</a></li>
+            <li><a href="https://grabify.link/" target="_blank">📍 IPlogger1</a></li>
+            <li><a href="https://www.shorturl.at/" target="_blank">📎 сокращение ссылок</a></li>
+            <li><a href="https://geoiptool.com/" target="_blank">🌍 GeoIPTool</a></li>
+            <li><a href="https://ipwhois.io/" target="_blank">💡 ipwhois</a></li>
+        </ul>
+    </div>
+
+    <div class="category">
+        <h2 onclick="toggleList(this)">🚚Поиск недвижимости, авто, объявлений</h2>
+        <ul class="resource-list">
+            <li><a href="https://t.me/avinfo" target="_blank">🚗 avinfo</a></li>
+            <li><a href="https://гибдд.рф/" target="_blank">🚓 GIBDD</a></li>
+            <li><a href="https://egrn-reestr.ru/" target="_blank">🏠 EGRN</a></li>
+            <li><a href="https://auto.ru/" target="_blank">🛻 Auto.ru</a></li>
+            <li><a href="https://www.cian.ru/" target="_blank">🏡 Циан</a></li>
+            <li><a href="https://www.domofond.ru/" target="_blank">📃 Домофонд</a></li>
+            <li><a href="https://www.avito.ru/" target="_blank">🛠️ Avito</a></li>
+            <li><a href="https://realty.yandex.ru/" target="_blank">💼 Яндекс.Недвижимость</a></li>
+            <li><a href="https://www.realtor.ru/" target="_blank">🔑 Риэлтор</a></li>
+            <li><a href="https://realty.mail.ru/" target="_blank">🏠 Недвижимость Mail.ru</a></li>
+        </ul>
+    </div>
+
+    <div class="category">
+        <h2 onclick="toggleList(this)">👑канал</h2>
+        <ul class="resource-list">
+            <li><a href="https://t.me/lemon_tool" target="_blank">🩲анал задрочить</a></li>
+            <li><a href="https://t.me/lemonaBIO" target="_blank">🔮био lemon</a></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function toggleList(header) {
+        const list = header.nextElementSibling;
+        list.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
