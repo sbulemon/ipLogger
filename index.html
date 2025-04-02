@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ресурсы</title>
+    <title>Ресурсы by @sbulemon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -15,10 +16,26 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
             background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%);
-            color: #fff;
+            background-size: 200% 200%;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
             min-height: 100vh;
             padding-bottom: 40px;
             overflow-x: hidden;
+            animation: gradientShift 10s ease infinite;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .light-theme {
+            background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+            color: #1f2937;
+            text-shadow: none;
+        }
+
+        .red-theme {
+            background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         header {
@@ -27,9 +44,17 @@
             text-align: center;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 10; /* Оставляем как есть */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             animation: slideDown 1s ease-out;
+        }
+
+        .light-theme header {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .red-theme header {
+            background: rgba(127, 29, 29, 0.95);
         }
 
         header h1 {
@@ -48,6 +73,36 @@
             margin: 30px auto;
         }
 
+        .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #search {
+            padding: 10px;
+            width: 50%;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: width 0.3s ease;
+        }
+
+        #search:focus {
+            width: 70%;
+            outline: none;
+        }
+
+        .light-theme #search {
+            background: rgba(0, 0, 0, 0.2);
+            color: #1f2937;
+        }
+
+        .red-theme #search {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
         .category {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -59,6 +114,14 @@
             animation: bounceIn 0.8s ease-out;
         }
 
+        .light-theme .category {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .red-theme .category {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         .category:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
@@ -66,16 +129,25 @@
 
         .category h2 {
             font-size: 1.8em;
-            color: #bb86fc;
+            color: #ffffff;
             cursor: pointer;
             padding: 10px 15px;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            transition: background 0.3s ease, transform 0.2s ease;
+            background: linear-gradient(45deg, #bb86fc, #03dac6);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .light-theme .category h2 {
+            color: #6200ea;
+        }
+
+        .red-theme .category h2 {
+            background: linear-gradient(45deg, #dc2626, #f87171);
+            color: #ffffff;
         }
 
         .category h2:hover {
-            background: rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
         }
 
@@ -99,11 +171,19 @@
         .resource-list li {
             margin: 12px 0;
             padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 6px;
             transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
             animation: slideInLeft 0.5s ease-out forwards;
             opacity: 0;
+        }
+
+        .light-theme .resource-list li {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .red-theme .resource-list li {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .resource-list.active li {
@@ -111,8 +191,16 @@
         }
 
         .resource-list li:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.2);
             transform: translateX(10px);
+        }
+
+        .light-theme .resource-list li:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .red-theme .resource-list li:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .resource-list li a {
@@ -123,11 +211,121 @@
             align-items: center;
             gap: 8px;
             transition: color 0.3s ease, transform 0.2s ease;
+            position: relative;
+        }
+
+        .light-theme .resource-list li a {
+            color: #0066cc;
+        }
+
+        .red-theme .resource-list li a {
+            color: #f87171;
         }
 
         .resource-list li a:hover {
-            color: #fff;
+            color: #ffffff;
             transform: scale(1.1);
+        }
+
+        .light-theme .resource-list li a:hover {
+            color: #1f2937;
+        }
+
+        .red-theme .resource-list li a:hover {
+            color: #ffffff;
+        }
+
+        .resource-list li a::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .light-theme .resource-list li a::after {
+            background: #e5e7eb;
+            color: #1f2937;
+        }
+
+        .red-theme .resource-list li a::after {
+            background: #991b1b;
+            color: #ffffff;
+        }
+
+        .resource-list li a:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .resource-list li a i:hover {
+            animation: bounce 0.5s ease infinite;
+        }
+
+        /* Стили кнопок */
+        #themeToggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px;
+            background: #1e3a8a;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 20; /* Увеличиваем z-index, чтобы быть выше шапки */
+        }
+
+        #themeToggle:hover {
+            background: #3b82f6;
+        }
+
+        #toggleAll {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #166534;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 5; /* Ниже кнопки тем, но выше контента */
+        }
+
+        #toggleAll:hover {
+            background: #22c55e;
+        }
+
+        #scrollTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #c2410c;
+            border: none;
+            border-radius: 50%;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            display: none;
+            transition: background 0.3s ease;
+            z-index: 15; /* Выше контента, но ниже кнопки тем */
+        }
+
+        #scrollTop:hover {
+            background: #f97316;
         }
 
         /* Анимации */
@@ -162,7 +360,17 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Задержка для последовательной анимации элементов списка */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
         .resource-list li:nth-child(1) { animation-delay: 0.1s; }
         .resource-list li:nth-child(2) { animation-delay: 0.2s; }
         .resource-list li:nth-child(3) { animation-delay: 0.3s; }
@@ -173,6 +381,15 @@
         .resource-list li:nth-child(8) { animation-delay: 0.8s; }
         .resource-list li:nth-child(9) { animation-delay: 0.9s; }
         .resource-list li:nth-child(10) { animation-delay: 1s; }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
 
         /* Адаптивность */
         @media (max-width: 768px) {
@@ -188,79 +405,156 @@
             .resource-list li {
                 padding: 6px 10px;
             }
+            #search {
+                width: 80%;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
 
-<header>
-    <h1>Список Ресурсов</h1>
-</header>
+    <header>
+        <h1>Список Ресурсов</h1>
+    </header>
 
-<div class="container">
-    <div class="category">
-        <h2 onclick="toggleList(this)">⚔Основные боты</h2>
-        <ul class="resource-list">
-            <li><a href="https://t.me/Lemonglazb_bot" target="_blank">🗃 ГЛАЗ Бобобра</a></li>
-            <li><a href="https://t.me/FreeSearchbot_bot" target="_blank">🗂 LEAK OSINT</a></li>
-            <li><a href="https://t.me/Skkskdkdkekebot" target="_blank">📦 USER BOX</a></li>
-            <li><a href="https://t.me/Deanon_po_nomery_1bot" target="_blank">🔎 докс</a></li>
-            <li><a href="https://t.me/VKHistoryRobot" target="_blank">📄 ВК история профилей</a></li>
-            <li><a href="https://smsc.ru/testhlr/" target="_blank">📲 HLR запрос</a></li>
-            <li><a href="https://t.me/tgdb_bot" target="_blank">💬 Telegram ID Finder</a></li>
-            <li><a href="https://t.me/WhoisDomBot" target="_blank">🧩 WhoIs</a></li>
-            <li><a href="https://t.me/ProxyMTProto" target="_blank">🔐 proxy</a></li>
-            <li><a href="https://t.me/funstatlemonbot" target="_blank">💠 FUN STAT</a></li>
-        </ul>
+    <select id="themeToggle">
+        <option value="dark">Темная тема</option>
+        <option value="light">Светлая тема</option>
+        <option value="red">Красная тема</option>
+    </select>
+
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Поиск ресурсов...">
+    </div>
+    <button id="toggleAll">Развернуть все</button>
+
+    <div class="container">
+        <div class="category">
+            <h2 onclick="toggleList(this)">⚔Основные боты</h2>
+            <ul class="resource-list">
+                <li><a href="https://t.me/Lemonglazb_bot" data-tooltip="Поиск информации"><i class="fas fa-eye"></i> ГЛАЗ Бобобра</a></li>
+                <li><a href="https://t.me/FreeSearchbot_bot" data-tooltip="OSINT бот"><i class="fas fa-search"></i> LEAK OSINT</a></li>
+                <li><a href="https://t.me/Skkskdkdkekebot" data-tooltip="Поиск пользователей"><i class="fas fa-user"></i> USER BOX</a></li>
+                <li><a href="https://t.me/Deanon_po_nomery_1bot" data-tooltip="Деанон по номеру"><i class="fas fa-phone"></i> докс</a></li>
+                <li><a href="https://t.me/VKHistoryRobot" data-tooltip="История ВК"><i class="fab fa-vk"></i> ВК история профилей</a></li>
+                <li><a href="https://smsc.ru/testhlr/" data-tooltip="HLR запрос"><i class="fas fa-signal"></i> HLR запрос</a></li>
+                <li><a href="https://t.me/tgdb_bot" data-tooltip="ID в Telegram"><i class="fab fa-telegram"></i> Telegram ID Finder</a></li>
+                <li><a href="https://t.me/WhoisDomBot" data-tooltip="WHOIS доменов"><i class="fas fa-globe"></i> WhoIs</a></li>
+                <li><a href="https://t.me/ProxyMTProto" data-tooltip="Прокси для Telegram"><i class="fas fa-shield-alt"></i> proxy</a></li>
+                <li><a href="https://t.me/funstatlemonbot" data-tooltip="Статистика"><i class="fas fa-chart-bar"></i> FUN STAT</a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2 onclick="toggleList(this)">🔎Анализ IP и логеры</h2>
+            <ul class="resource-list">
+                <li><a href="https://ip-api.com/" data-tooltip="Информация об IP"><i class="fas fa-map-marker-alt"></i> IP-API</a></li>
+                <li><a href="https://ipinfo.io/" data-tooltip="Детали IP"><i class="fas fa-info-circle"></i> IPInfo.io</a></li>
+                <li><a href="https://t.me/ip_score_checker_bot" data-tooltip="Проверка IP"><i class="fas fa-check-circle"></i> ip_score_checker_bot</a></li>
+                <li><a href="https://t.me/Camera_Hack_PyBot" data-tooltip="Доступ к камерам"><i class="fas fa-camera"></i> Взлом камеры</a></li>
+                <li><a href="https://t.me/LetThem_Bot" data-tooltip="Доступ к камерам"><i class="fas fa-camera"></i> Взлом камеры2</a></li>
+                <li><a href="https://iplogger.org/ru/" data-tooltip="Логгер IP"><i class="fas fa-link"></i> iplogger</a></li>
+                <li><a href="https://grabify.link/" data-tooltip="Логгер IP"><i class="fas fa-link"></i> IPlogger1</a></li>
+                <li><a href="https://www.shorturl.at/" data-tooltip="Сокращение ссылок"><i class="fas fa-cut"></i> сокращение ссылок</a></li>
+                <li><a href="https://geoiptool.com/" data-tooltip="Геолокация IP"><i class="fas fa-globe"></i> GeoIPTool</a></li>
+                <li><a href="https://ipwhois.io/" data-tooltip="WHOIS IP"><i class="fas fa-info"></i> ipwhois</a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2 onclick="toggleList(this)">🚚Поиск недвижимости, авто, объявлений</h2>
+            <ul class="resource-list">
+                <li><a href="https://t.me/avinfo" data-tooltip="Информация об авто"><i class="fas fa-car"></i> avinfo</a></li>
+                <li><a href="https://гибдд.рф/" data-tooltip="Проверка ГИБДД"><i class="fas fa-shield-alt"></i> GIBDD</a></li>
+                <li><a href="https://egrn-reestr.ru/" data-tooltip="Реестр недвижимости"><i class="fas fa-home"></i> EGRN</a></li>
+                <li><a href="https://auto.ru/" data-tooltip="Продажа авто"><i class="fas fa-car-side"></i> Auto.ru</a></li>
+                <li><a href="https://www.cian.ru/" data-tooltip="Недвижимость"><i class="fas fa-building"></i> Циан</a></li>
+                <li><a href="https://www.domofond.ru/" data-tooltip="Объявления"><i class="fas fa-file-alt"></i> Домофонд</a></li>
+                <li><a href="https://www.avito.ru/" data-tooltip="Объявления"><i class="fas fa-shopping-cart"></i> Avito</a></li>
+                <li><a href="https://realty.yandex.ru/" data-tooltip="Недвижимость Яндекс"><i class="fab fa-yandex"></i> Яндекс.Недвижимость</a></li>
+                <li><a href="https://www.realtor.ru/" data-tooltip="Риэлторские услуги"><i class="fas fa-key"></i> Риэлтор</a></li>
+                <li><a href="https://realty.mail.ru/" data-tooltip="Недвижимость Mail.ru"><i class="fas fa-envelope"></i> Недвижимость Mail.ru</a></li>
+            </ul>
+        </div>
+
+        <div class="category">
+            <h2 onclick="toggleList(this)">👑канал</h2>
+            <ul class="resource-list">
+                <li><a href="https://t.me/lemon_tool" data-tooltip="Основной канал"><i class="fab fa-telegram"></i> анал задрочить</a></li>
+                <li><a href="https://t.me/lemonaBIO" data-tooltip="Биография"><i class="fas fa-user-circle"></i> био lemon</a></li>
+            </ul>
+        </div>
     </div>
 
-    <div class="category">
-        <h2 onclick="toggleList(this)">🔎Анализ IP и логеры</h2>
-        <ul class="resource-list">
-            <li><a href="https://ip-api.com/" target="_blank">📍IP-API</a></li>
-            <li><a href="https://ipinfo.io/" target="_blank">📍IPInfo.io</a></li>
-            <li><a href="https://t.me/ip_score_checker_bot" target="_blank">📍ip_score_checker_bot</a></li>
-            <li><a href="https://t.me/Camera_Hack_PyBot" target="_blank">📷 Взлом камеры</a></li>
-            <li><a href="https://t.me/LetThem_Bot" target="_blank">📷 Взлом камеры2</a></li>
-            <li><a href="https://iplogger.org/ru/" target="_blank">📍 iplogger</a></li>
-            <li><a href="https://grabify.link/" target="_blank">📍 IPlogger1</a></li>
-            <li><a href="https://www.shorturl.at/" target="_blank">📎 сокращение ссылок</a></li>
-            <li><a href="https://geoiptool.com/" target="_blank">🌍 GeoIPTool</a></li>
-            <li><a href="https://ipwhois.io/" target="_blank">💡 ipwhois</a></li>
-        </ul>
-    </div>
+    <button id="scrollTop">↑</button>
 
-    <div class="category">
-        <h2 onclick="toggleList(this)">🚚Поиск недвижимости, авто, объявлений</h2>
-        <ul class="resource-list">
-            <li><a href="https://t.me/avinfo" target="_blank">🚗 avinfo</a></li>
-            <li><a href="https://гибдд.рф/" target="_blank">🚓 GIBDD</a></li>
-            <li><a href="https://egrn-reestr.ru/" target="_blank">🏠 EGRN</a></li>
-            <li><a href="https://auto.ru/" target="_blank">🛻 Auto.ru</a></li>
-            <li><a href="https://www.cian.ru/" target="_blank">🏡 Циан</a></li>
-            <li><a href="https://www.domofond.ru/" target="_blank">📃 Домофонд</a></li>
-            <li><a href="https://www.avito.ru/" target="_blank">🛠️ Avito</a></li>
-            <li><a href="https://realty.yandex.ru/" target="_blank">💼 Яндекс.Недвижимость</a></li>
-            <li><a href="https://www.realtor.ru/" target="_blank">🔑 Риэлтор</a></li>
-            <li><a href="https://realty.mail.ru/" target="_blank">🏠 Nedвижимость Mail.ru</a></li>
-        </ul>
-    </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Частицы
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80 },
+                "color": { "value": "#bb86fc" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 3 },
+                "move": { "speed": 2 }
+            }
+        });
 
-    <div class="category">
-        <h2 onclick="toggleList(this)">👑канал</h2>
-        <ul class="resource-list">
-            <li><a href="https://t.me/lemon_tool" target="_blank">🩲анал задрочить</a></li>
-            <li><a href="https://t.me/lemonaBIO" target="_blank">🔮био lemon</a></li>
-        </ul>
-    </div>
-</div>
+        // Переключатель тем
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('change', function() {
+            document.body.classList.remove('light-theme', 'red-theme');
+            if (this.value === 'light') {
+                document.body.classList.add('light-theme');
+            } else if (this.value === 'red') {
+                document.body.classList.add('red-theme');
+            }
+        });
 
-<script>
-    function toggleList(header) {
-        const list = header.nextElementSibling;
-        list.classList.toggle('active');
-    }
-</script>
+        // Поиск
+        document.getElementById('search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.resource-list li').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
 
+        // Сворачивание/разворачивание всех категорий
+        const toggleAllBtn = document.getElementById('toggleAll');
+        let allExpanded = false;
+        toggleAllBtn.onclick = () => {
+            allExpanded = !allExpanded;
+            document.querySelectorAll('.resource-list').forEach(list => {
+                list.classList.toggle('active', allExpanded);
+            });
+            toggleAllBtn.textContent = allExpanded ? 'Свернуть все' : 'Развернуть все';
+        };
+
+        // Копирование ссылок
+        document.querySelectorAll('.resource-list li a').forEach(link => {
+            link.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(link.href);
+                alert('Ссылка скопирована: ' + link.href);
+            });
+        });
+
+        // Кнопка "Наверх"
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.onscroll = () => {
+            scrollTopBtn.style.display = window.scrollY > 200 ? 'block' : 'none';
+        };
+        scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Раскрытие категорий
+        function toggleList(header) {
+            const list = header.nextElementSibling;
+            list.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
