@@ -15,175 +15,216 @@
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #1e1e2f 0%, #2a2a4a 100%);
+            background: linear-gradient(135deg, #1a1e3a 0%, #2d3a4a 50%, #3a5a6a 100%);
             background-size: 200% 200%;
             color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
             min-height: 100vh;
             padding-bottom: 40px;
             overflow-x: hidden;
-            animation: gradientShift 10s ease infinite;
+            animation: gradientGlow 12s ease infinite, fadePulse 4s infinite alternate;
             transition: background 0.5s ease, color 0.5s ease;
         }
 
         .light-theme {
-            background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+            background: linear-gradient(135deg, #f0f4f8 0%, #e0e7f0 50%, #d0dfea 100%);
             color: #1f2937;
             text-shadow: none;
         }
 
         .red-theme {
-            background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%);
+            background: linear-gradient(135deg, #4a1d1d 0%, #8a2b2b 50%, #b91c1c 100%);
             color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
         }
 
         header {
-            background: rgba(30, 30, 47, 0.95);
-            padding: 20px;
+            background: rgba(26, 30, 58, 0.95);
+            padding: 25px;
             text-align: center;
             position: sticky;
             top: 0;
-            z-index: 10; /* Оставляем как есть */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             animation: slideDown 1s ease-out;
+            border-bottom: 2px solid rgba(187, 134, 252, 0.5);
         }
 
         .light-theme header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(240, 244, 248, 0.95);
+            border-bottom: 2px solid rgba(98, 0, 234, 0.5);
         }
 
         .red-theme header {
-            background: rgba(127, 29, 29, 0.95);
+            background: rgba(74, 29, 29, 0.95);
+            border-bottom: 2px solid rgba(248, 113, 113, 0.5);
         }
 
         header h1 {
-            font-size: 2.5em;
-            letter-spacing: 2px;
+            font-size: 2.8em;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            background: linear-gradient(to right, #bb86fc, #03dac6);
+            background: linear-gradient(to right, #bb86fc, #03dac6, #ff6f61);
             -webkit-background-clip: text;
             color: transparent;
-            animation: pulseText 2s infinite alternate, fadeIn 1.5s ease-in-out;
+            animation: pulseText 2.5s infinite alternate, fadeIn 1.5s ease-in-out;
+            text-shadow: 0 0 10px rgba(187, 134, 252, 0.7);
         }
 
         .container {
             width: 85%;
-            max-width: 1200px;
-            margin: 30px auto;
+            max-width: 1300px;
+            margin: 40px auto;
         }
 
         .search-container {
-            text-align: center;
-            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0;
+            gap: 15px;
+        }
+
+        #search, #categoryFilter {
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 1.1em;
+            transition: width 0.3s ease, box-shadow 0.3s ease;
+            -webkit-appearance: menulist;
+            -moz-appearance: menulist;
+            appearance: menulist;
         }
 
         #search {
-            padding: 10px;
-            width: 50%;
-            border-radius: 8px;
-            border: none;
-            background: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            transition: width 0.3s ease;
+            width: 55%;
         }
 
         #search:focus {
             width: 70%;
             outline: none;
+            box-shadow: 0 0 10px rgba(3, 218, 198, 0.5);
         }
 
-        .light-theme #search {
-            background: rgba(0, 0, 0, 0.2);
+        .light-theme #search, .light-theme #categoryFilter {
+            background: rgba(0, 0, 0, 0.15);
             color: #1f2937;
         }
 
-        .red-theme #search {
-            background: rgba(255, 255, 255, 0.2);
+        .red-theme #search, .red-theme #categoryFilter {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        #categoryFilter option {
+            background: #2d3a4a;
+            color: #ffffff;
+            padding: 8px;
+        }
+
+        .light-theme #categoryFilter option {
+            background: #f0f4f8;
+            color: #1f2937;
+        }
+
+        .red-theme #categoryFilter option {
+            background: #4a1d1d;
             color: #ffffff;
         }
 
         .category {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: bounceIn 0.8s ease-out;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(187, 134, 252, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: bounceIn 0.9s ease-out;
         }
 
         .light-theme .category {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(98, 0, 234, 0.2);
         }
 
         .red-theme .category {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(248, 113, 113, 0.2);
         }
 
         .category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(187, 134, 252, 0.3);
         }
 
         .category h2 {
-            font-size: 1.8em;
+            font-size: 2em;
             color: #ffffff;
             cursor: pointer;
-            padding: 10px 15px;
-            border-radius: 8px;
-            background: linear-gradient(45deg, #bb86fc, #03dac6);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s ease;
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #bb86fc, #03dac6, #ff6f61);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .light-theme .category h2 {
             color: #6200ea;
+            background: linear-gradient(45deg, #e5e7eb, #d1d5db, #c7d2fe);
         }
 
         .red-theme .category h2 {
-            background: linear-gradient(45deg, #dc2626, #f87171);
+            background: linear-gradient(45deg, #dc2626, #f87171, #ef4444);
             color: #ffffff;
         }
 
         .category h2:hover {
-            transform: scale(1.05);
+            transform: scale(1.07);
+            box-shadow: 0 0 15px rgba(187, 134, 252, 0.6);
         }
 
         .resource-list {
             list-style: none;
-            padding: 10px 0 0 20px;
+            padding: 15px 0 0 25px;
             display: none;
             opacity: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.6s ease;
         }
 
         .resource-list.active {
             display: block;
             opacity: 1;
-            max-height: 600px;
-            animation: expandList 0.6s ease-out;
+            max-height: 1200px;
+            animation: expandList 0.7s ease-out;
         }
 
         .resource-list li {
-            margin: 12px 0;
-            padding: 8px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-            animation: slideInLeft 0.5s ease-out forwards;
+            margin: 15px 0;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            transition: background 0.4s ease, transform 0.3s ease, opacity 0.4s ease;
+            animation: slideInLeft 0.6s ease-out forwards;
             opacity: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid rgba(3, 218, 198, 0.5);
         }
 
         .light-theme .resource-list li {
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.12);
+            border-left: 4px solid rgba(98, 0, 234, 0.5);
         }
 
         .red-theme .resource-list li {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
+            border-left: 4px solid rgba(248, 113, 113, 0.5);
         }
 
         .resource-list.active li {
@@ -191,26 +232,29 @@
         }
 
         .resource-list li:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(12px);
+            box-shadow: 0 0 10px rgba(3, 218, 198, 0.3);
         }
 
         .light-theme .resource-list li:hover {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.25);
+            box-shadow: 0 0 10px rgba(98, 0, 234, 0.3);
         }
 
         .red-theme .resource-list li:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(248, 113, 113, 0.3);
         }
 
         .resource-list li a {
             text-decoration: none;
             color: #03dac6;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: color 0.3s ease, transform 0.2s ease;
+            gap: 10px;
+            transition: color 0.4s ease, transform 0.3s ease;
             position: relative;
         }
 
@@ -224,7 +268,7 @@
 
         .resource-list li a:hover {
             color: #ffffff;
-            transform: scale(1.1);
+            transform: scale(1.12);
         }
 
         .light-theme .resource-list li a:hover {
@@ -238,26 +282,27 @@
         .resource-list li a::after {
             content: attr(data-tooltip);
             position: absolute;
-            bottom: 100%;
+            bottom: 120%;
             left: 50%;
             transform: translateX(-50%);
-            background: #333;
+            background: rgba(51, 51, 51, 0.9);
             color: #ffffff;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.9em;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 1em;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
+            white-space: nowrap;
         }
 
         .light-theme .resource-list li a::after {
-            background: #e5e7eb;
-            color: #1f2937;
+            background: rgba(31, 41, 55, 0.9);
+            color: #ffffff;
         }
 
         .red-theme .resource-list li a::after {
-            background: #991b1b;
+            background: rgba(153, 27, 27, 0.9);
             color: #ffffff;
         }
 
@@ -267,68 +312,131 @@
         }
 
         .resource-list li a i:hover {
-            animation: bounce 0.5s ease infinite;
+            animation: bounce 0.6s ease infinite;
         }
 
-        /* Стили кнопок */
+        .favorite {
+            color: #facc15 !important;
+        }
+
         #themeToggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px;
+            top: 25px;
+            right: 25px;
+            padding: 12px 20px;
             background: #1e3a8a;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
             cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 20; /* Увеличиваем z-index, чтобы быть выше шапки */
+            transition: background 0.4s ease, transform 0.3s ease;
+            z-index: 20;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
         }
 
         #themeToggle:hover {
             background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
         }
 
-        #toggleAll {
+        #themeToggle:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+        }
+
+        #toggleAll, #exportList {
             display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
+            margin: 25px auto;
+            padding: 12px 25px;
             background: #166534;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
             cursor: pointer;
-            transition: background 0.3s ease;
-            z-index: 5; /* Ниже кнопки тем, но выше контента */
+            transition: background 0.4s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(22, 101, 52, 0.4);
         }
 
-        #toggleAll:hover {
+        #toggleAll:hover, #exportList:hover {
             background: #22c55e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+        }
+
+        #toggleAll:active, #exportList:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(34, 197, 94, 0.4);
         }
 
         #scrollTop {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
+            bottom: 25px;
+            right: 25px;
+            padding: 12px 18px;
             background: #c2410c;
             border: none;
             border-radius: 50%;
             color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
             cursor: pointer;
             display: none;
-            transition: background 0.3s ease;
-            z-index: 15; /* Выше контента, но ниже кнопки тем */
+            transition: background 0.4s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(194, 65, 12, 0.4);
+            z-index: 15;
         }
 
         #scrollTop:hover {
             background: #f97316;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.6);
         }
 
-        /* Анимации */
+        #scrollTop:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(249, 115, 22, 0.4);
+        }
+
+        .pagination {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .pagination button {
+            padding: 10px 20px;
+            margin: 0 8px;
+            background: #1e3a8a;
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
+        }
+
+        .pagination button:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+        }
+
+        .pagination button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+        }
+
+        .pagination button:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
         @keyframes slideDown {
             from { transform: translateY(-100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
@@ -340,8 +448,8 @@
         }
 
         @keyframes pulseText {
-            from { text-shadow: 0 0 5px #bb86fc; }
-            to { text-shadow: 0 0 15px #03dac6, 0 0 25px #bb86fc; }
+            from { text-shadow: 0 0 8px #bb86fc; }
+            to { text-shadow: 0 0 20px #03dac6, 0 0 30px #ff6f61; }
         }
 
         @keyframes bounceIn {
@@ -352,23 +460,28 @@
 
         @keyframes expandList {
             from { opacity: 0; max-height: 0; }
-            to { opacity: 1; max-height: 600px; }
+            to { opacity: 1; max-height: 1200px; }
         }
 
         @keyframes slideInLeft {
-            from { transform: translateX(-50px); opacity: 0; }
+            from { transform: translateX(-60px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
 
-        @keyframes gradientShift {
+        @keyframes gradientGlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes fadePulse {
+            from { opacity: 0.9; }
+            to { opacity: 1; }
+        }
+
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-6px); }
         }
 
         .resource-list li:nth-child(1) { animation-delay: 0.1s; }
@@ -391,22 +504,25 @@
             z-index: -1;
         }
 
-        /* Адаптивность */
         @media (max-width: 768px) {
             .container {
                 width: 90%;
             }
             header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
             .category h2 {
-                font-size: 1.5em;
+                font-size: 1.6em;
             }
             .resource-list li {
-                padding: 6px 10px;
+                padding: 8px 12px;
             }
-            #search {
-                width: 80%;
+            .search-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            #search, #categoryFilter {
+                width: 100%;
             }
         }
     </style>
@@ -418,20 +534,33 @@
         <h1>Список Ресурсов</h1>
     </header>
 
-    <select id="themeToggle">
+    <select id="themeToggle" aria-label="Выбор темы">
         <option value="dark">Темная тема</option>
         <option value="light">Светлая тема</option>
         <option value="red">Красная тема</option>
     </select>
 
     <div class="search-container">
-        <input type="text" id="search" placeholder="Поиск ресурсов...">
+        <input type="text" id="search" placeholder="Поиск ресурсов..." aria-label="Поиск ресурсов">
+        <select id="categoryFilter" aria-label="Фильтр категорий">
+            <option value="all">Все категории</option>
+            <option value="main-bots">Основные боты</option>
+            <option value="ip-analysis">Анализ IP и логеры</option>
+            <option value="real-estate">Поиск недвижимости, авто, объявлений</option>
+            <option value="channel">Канал</option>
+            <option value="name-search">Поиск по ФИО</option>
+            <option value="tools">Инструменты</option>
+            <option value="account-recovery">Восстановление доступа</option>
+            <option value="phone-search">Поиск по номеру телефона</option>
+            <option value="misc">Прочее</option>
+        </select>
     </div>
     <button id="toggleAll">Развернуть все</button>
+    <button id="exportList">Экспортировать список</button>
 
     <div class="container">
-        <div class="category">
-            <h2 onclick="toggleList(this)">⚔Основные боты</h2>
+        <div class="category" data-category="main-bots">
+            <h2 onclick="toggleList(this)">⚔ Основные боты</h2>
             <ul class="resource-list">
                 <li><a href="https://t.me/Lemonglazb_bot" data-tooltip="Поиск информации"><i class="fas fa-eye"></i> ГЛАЗ Бобобра</a></li>
                 <li><a href="https://t.me/FreeSearchbot_bot" data-tooltip="OSINT бот"><i class="fas fa-search"></i> LEAK OSINT</a></li>
@@ -444,11 +573,14 @@
                 <li><a href="https://t.me/ProxyMTProto" data-tooltip="Прокси для Telegram"><i class="fas fa-shield-alt"></i> proxy</a></li>
                 <li><a href="https://t.me/funstatlemonbot" data-tooltip="Статистика"><i class="fas fa-chart-bar"></i> FUN STAT</a></li>
                 <li><a href="https://t.me/Dyxleslemonabot" data-tooltip="дух (поиск по тг)"><i class="fas fa-chart-bar"></i> ДУХ ПОИСК ПО ТГ</a></li>
+                <li><a href="https://t.me/IntelBot" data-tooltip="Интеллектуальный анализ"><i class="fas fa-brain"></i> Intel Bot</a></li>
+                <li><a href="https://t.me/DataHunterBot" data-tooltip="Поиск данных"><i class="fas fa-database"></i> Data Hunter</a></li>
+                <li><a href="https://t.me/SocialScannerBot" data-tooltip="Сканирование соцсетей"><i class="fas fa-users"></i> Social Scanner</a></li>
             </ul>
         </div>
 
-        <div class="category">
-            <h2 onclick="toggleList(this)">🔎Анализ IP и логеры</h2>
+        <div class="category" data-category="ip-analysis">
+            <h2 onclick="toggleList(this)">🔎 Анализ IP и логеры</h2>
             <ul class="resource-list">
                 <li><a href="https://ip-api.com/" data-tooltip="Информация об IP"><i class="fas fa-map-marker-alt"></i> IP-API</a></li>
                 <li><a href="https://ipinfo.io/" data-tooltip="Детали IP"><i class="fas fa-info-circle"></i> IPInfo.io</a></li>
@@ -460,11 +592,14 @@
                 <li><a href="https://www.shorturl.at/" data-tooltip="Сокращение ссылок"><i class="fas fa-cut"></i> сокращение ссылок</a></li>
                 <li><a href="https://geoiptool.com/" data-tooltip="Геолокация IP"><i class="fas fa-globe"></i> GeoIPTool</a></li>
                 <li><a href="https://ipwhois.io/" data-tooltip="WHOIS IP"><i class="fas fa-info"></i> ipwhois</a></li>
+                <li><a href="https://whatismyipaddress.com/" data-tooltip="Информация о моем IP"><i class="fas fa-laptop"></i> WhatIsMyIP</a></li>
+                <li><a href="https://db-ip.com/" data-tooltip="База IP-адресов"><i class="fas fa-database"></i> DB-IP</a></li>
+                <li><a href="https://ipleak.net/" data-tooltip="Проверка утечек IP"><i class="fas fa-shield-alt"></i> IPLeak</a></li>
             </ul>
         </div>
 
-        <div class="category">
-            <h2 onclick="toggleList(this)">🚚Поиск недвижимости, авто, объявлений</h2>
+        <div class="category" data-category="real-estate">
+            <h2 onclick="toggleList(this)">🚚 Поиск недвижимости, авто, объявлений</h2>
             <ul class="resource-list">
                 <li><a href="https://t.me/avinfo" data-tooltip="Информация об авто"><i class="fas fa-car"></i> avinfo</a></li>
                 <li><a href="https://гибдд.рф/" data-tooltip="Проверка ГИБДД"><i class="fas fa-shield-alt"></i> GIBDD</a></li>
@@ -476,31 +611,139 @@
                 <li><a href="https://realty.yandex.ru/" data-tooltip="Недвижимость Яндекс"><i class="fab fa-yandex"></i> Яндекс.Недвижимость</a></li>
                 <li><a href="https://www.realtor.ru/" data-tooltip="Риэлторские услуги"><i class="fas fa-key"></i> Риэлтор</a></li>
                 <li><a href="https://realty.mail.ru/" data-tooltip="Недвижимость Mail.ru"><i class="fas fa-envelope"></i> Недвижимость Mail.ru</a></li>
+                <li><a href="https://www.n1.ru/" data-tooltip="Недвижимость и аренда"><i class="fas fa-home"></i> N1.ru</a></li>
+                <li><a href="https://www.youla.ru/" data-tooltip="Объявления Youla"><i class="fas fa-bullhorn"></i> Youla</a></li>
+                <li><a href="https://www.drom.ru/" data-tooltip="Автомобили Drom"><i class="fas fa-car"></i> Drom</a></li>
             </ul>
         </div>
 
-        <div class="category">
-            <h2 onclick="toggleList(this)">👑канал</h2>
+        <div class="category" data-category="channel">
+            <h2 onclick="toggleList(this)">👑 Канал</h2>
             <ul class="resource-list">
                 <li><a href="https://t.me/lemon_tool" data-tooltip="Основной канал"><i class="fab fa-telegram"></i> анал задрочить</a></li>
                 <li><a href="https://t.me/lemonaBIO" data-tooltip="Биография"><i class="fas fa-user-circle"></i> био lemon</a></li>
+                <li><a href="https://t.me/lemonUpdates" data-tooltip="Обновления"><i class="fas fa-bell"></i> Lemon Updates</a></li>
+            </ul>
+        </div>
+
+        <div class="category" data-category="name-search">
+            <h2 onclick="toggleList(this)">🔍 Поиск по ФИО гражданина любой страны</h2>
+            <ul class="resource-list">
+                <li><a href="https://aleph.occrp.org/" data-tooltip="Поиск по базам данных, файлам, реестрам"><i class="fas fa-database"></i> Aleph</a></li>
+                <li><a href="https://www.locatefamily.com/" data-tooltip="Найдет адрес"><i class="fas fa-map-pin"></i> LocateFamily</a></li>
+                <li><a href="https://www.infobel.com/" data-tooltip="Найдет номер телефона, адрес и ФИО"><i class="fas fa-phone"></i> Infobel</a></li>
+                <li><a href="https://rocketreach.co/" data-tooltip="Поиск в LinkedIn, Facebook и других сайтах"><i class="fas fa-envelope"></i> RocketReach</a></li>
+                <li><a href="https://munscanner.com/dbs/" data-tooltip="Поиск по реестрам компаний"><i class="fas fa-building"></i> Munscanner</a></li>
+                <li><a href="https://news-explorer.mybluemix.net/" data-tooltip="Поиск в СМИ"><i class="fas fa-newspaper"></i> News Explorer</a></li>
+                <li><a href="https://sanctionssearch.ofac.treas.gov/" data-tooltip="Поиск в санкционном списке США"><i class="fas fa-ban"></i> OFAC Sanctions</a></li>
+                <li><a href="https://github.com/WhiteHatInspector/emailGuesser" data-tooltip="Подбирает возможные email"><i class="fas fa-at"></i> EmailGuesser</a></li>
+                <li><a href="https://billiongraves.ru/" data-tooltip="Найдет данные о захоронении"><i class="fas fa-cross"></i> BillionGraves</a></li>
+                <li><a href="https://www.findmypast.co.uk/" data-tooltip="Браки, смерти, рождения до 2006"><i class="fas fa-history"></i> FindMyPast</a></li>
+                <li><a href="https://webmii.com/" data-tooltip="Упоминания в новостях и соцсетях"><i class="fas fa-globe"></i> WebMii</a></li>
+                <li><a href="https://xlek.com/" data-tooltip="Поиск доменов по ФИО"><i class="fas fa-server"></i> Xlek</a></li>
+                <li><a href="https://my.mail.ru/my/search_people" data-tooltip="Поиск в Мой Мир"><i class="fas fa-users"></i> Мой Мир</a></li>
+                <li><a href="https://leak-lookup.com/search" data-tooltip="Поиск утечек"><i class="fas fa-leak"></i> Leak-Lookup</a></li>
+                <li><a href="https://offshoreleaks.icij.org/" data-tooltip="Офшорные компании"><i class="fas fa-briefcase"></i> OffshoreLeaks</a></li>
+                <li><a href="https://app02.bazl.admin.ch/web/bazl/en/#/lfr/search" data-tooltip="Реестр авиации Швейцарии"><i class="fas fa-plane"></i> Swiss Aviation</a></li>
+                <li><a href="https://opensanctions.org/" data-tooltip="Поиск в санкциях"><i class="fas fa-gavel"></i> OpenSanctions</a></li>
+                <li><a href="http://seintpl.github.io/NAMINT/" data-tooltip="Ссылки на соцсети"><i class="fas fa-link"></i> NAMINT</a></li>
+                <li><a href="https://www.archivesportaleurope.net/" data-tooltip="Архивы Европы"><i class="fas fa-archive"></i> ArchivesPortalEurope</a></li>
+                <li><a href="https://t.me/unamer_official_bot" data-tooltip="Поиск в Telegram"><i class="fab fa-telegram"></i> Unamer Bot</a></li>
+                <li><a href="https://t.me/UniversalSearchOfBot" data-tooltip="Поиск через другие боты"><i class="fas fa-search"></i> UniversalSearch</a></li>
+                <li><a href="https://www.spokeo.com/" data-tooltip="Поиск по имени и адресу"><i class="fas fa-user"></i> Spokeo</a></li>
+                <li><a href="https://www.pipl.com/" data-tooltip="Глубокий поиск по ФИО"><i class="fas fa-search-plus"></i> Pipl</a></li>
+            </ul>
+        </div>
+
+        <div class="category" data-category="tools">
+            <h2 onclick="toggleList(this)">🛠 Инструменты</h2>
+            <ul class="resource-list">
+                <li><a href="https://www.behindthename.com/" data-tooltip="Информация об именах"><i class="fas fa-info-circle"></i> BehindTheName</a></li>
+                <li><a href="https://www.name-generator.org.uk/" data-tooltip="Генератор имен"><i class="fas fa-magic"></i> Name Generator</a></li>
+                <li><a href="https://www.fakenamegenerator.com/" data-tooltip="Фальшивые данные"><i class="fas fa-user-secret"></i> Fake Name Generator</a></li>
+            </ul>
+        </div>
+
+        <div class="category" data-category="account-recovery">
+            <h2 onclick="toggleList(this)">🔐 Восстановление доступа</h2>
+            <ul class="resource-list">
+                <li><a href="https://account.samsung.com/accounts/v1/MBR/findIdWithUserInfo" data-tooltip="Часть email или телефона"><i class="fab fa-samsung"></i> Samsung</a></li>
+                <li><a href="https://id.vk.com/about/id" data-tooltip="Модель телефона, часть почты"><i class="fab fa-vk"></i> VK</a></li>
+                <li><a href="https://twitter.com/account/begin_password_reset" data-tooltip="Часть почты"><i class="fab fa-twitter"></i> Twitter</a></li>
+                <li><a href="https://id8.cloud.huawei.com/AMW/portal/appealSelf/applyChangeAccount.html" data-tooltip="Часть почты, второго телефона"><i class="fas fa-mobile"></i> Huawei</a></li>
+                <li><a href="https://id.realme.com/v2/find_password.html" data-tooltip="Часть почты"><i class="fas fa-mobile-alt"></i> Realme</a></li>
+                <li><a href="https://www.facebook.com/login/identify?ctx=recover" data-tooltip="Часть почты, телефона, имени"><i class="fab fa-facebook"></i> Facebook</a></li>
+                <li><a href="https://account.live.com/acsr" data-tooltip="Часть почты"><i class="fab fa-microsoft"></i> Microsoft</a></li>
+                <li><a href="https://accounts.google.com/signin/recovery" data-tooltip="Восстановление Google"><i class="fab fa-google"></i> Google</a></li>
+            </ul>
+        </div>
+
+        <div class="category" data-category="phone-search">
+            <h2 onclick="toggleList(this)">📞 Поиск по номеру телефона</h2>
+            <ul class="resource-list">
+                <li><a href="https://emobiletracker.com/" data-tooltip="Тип номера, город, оператор"><i class="fas fa-phone"></i> EMobileTracker</a></li>
+                <li><a href="https://t.me/GetFb_bot" data-tooltip="Аккаунт Facebook"><i class="fab fa-facebook"></i> GetFb Bot</a></li>
+                <li><a href="https://smsc.ru/testhlr/" data-tooltip="Статус активности телефона"><i class="fas fa-signal"></i> SMS HLR</a></li>
+                <li><a href="https://github.com/itds-consulting/android-silent-ping-sms/releases" data-tooltip="Статус телефона через СМС"><i class="fas fa-sms"></i> SMS Ping</a></li>
+                <li><a href="https://tools.whoisxmlapi.com/reverse-whois-search" data-tooltip="Домены по номеру"><i class="fas fa-server"></i> WhoisXMLAPI</a></li>
+                <li><a href="https://www.vedbex.com/tools/phone2skype" data-tooltip="Аккаунт Skype"><i class="fab fa-skype"></i> VEDBEX</a></li>
+                <li><a href="https://sync.me/" data-tooltip="Имя и уровень спама"><i class="fas fa-address-book"></i> Sync.me</a></li>
+                <li><a href="https://leak-lookup.com/search" data-tooltip="Утечки с номером"><i class="fas fa-leak"></i> Leak-Lookup</a></li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.numbuster.android" data-tooltip="Имя в контактах"><i class="fab fa-android"></i> NumBuster</a></li>
+                <li><a href="https://revealname.com/" data-tooltip="Имя владельца"><i class="fas fa-user"></i> RevealName</a></li>
+                <li><a href="https://www.truecaller.com/" data-tooltip="Имя в контактах"><i class="fas fa-address-book"></i> Truecaller</a></li>
+                <li><a href="https://t.me/LeakCheck1_Bot" data-tooltip="Утечки с номером"><i class="fab fa-telegram"></i> LeakCheck Bot</a></li>
+                <li><a href="https://t.me/only_good_contacts_bot" data-tooltip="Имя в GetContact"><i class="fab fa-telegram"></i> GetContact Bot</a></li>
+                <li><a href="https://whoseno.com/" data-tooltip="Имя владельца"><i class="fas fa-user"></i> WhoseNo</a></li>
+                <li><a href="https://intelx.io/" data-tooltip="Упоминания в утечках"><i class="fas fa-database"></i> Intelx</a></li>
+                <li><a href="https://x-ray.contact/platform/search/" data-tooltip="Имена, аккаунты, почты"><i class="fas fa-x-ray"></i> X-Ray</a></li>
+                <li><a href="https://t.me/yfzxzxqwqbot" data-tooltip="Имя, аккаунты"><i class="fab fa-telegram"></i> Глаз Бога</a></li>
+                <li><a href="https://osint.industries/" data-tooltip="Профили в соцсетях"><i class="fas fa-network-wired"></i> OSINT Industries</a></li>
+                <li><a href="https://t.me/TrueCaller_Z_Bot" data-tooltip="Имя и почта"><i class="fab fa-telegram"></i> TrueCaller Bot</a></li>
+                <li><a href="https://t.me/unamer_official_bot" data-tooltip="Аккаунты Telegram"><i class="fab fa-telegram"></i> Unamer Bot</a></li>
+                <li><a href="https://t.me/intelligencesecurityiobot" data-tooltip="Поиск в утечках IntelX"><i class="fab fa-telegram"></i> IntelligenceSecurity Bot</a></li>
+                <li><a href="https://t.me/newSherlock_bot" data-tooltip="Поиск в TikTok, Instagram"><i class="fab fa-telegram"></i> Sherlock Bot</a></li>
+                <li><a href="https://t.me/UniversalSearchOfBot" data-tooltip="Поиск через другие боты"><i class="fas fa-search"></i> UniversalSearch</a></li>
+                <li><a href="https://www.whitepages.com/" data-tooltip="Поиск по номеру США"><i class="fas fa-phone"></i> Whitepages</a></li>
+                <li><a href="https://www.zabasearch.com/" data-tooltip="Поиск по номеру и имени"><i class="fas fa-search"></i> ZabaSearch</a></li>
+            </ul>
+        </div>
+
+        <div class="category" data-category="misc">
+            <h2 onclick="toggleList(this)">📌 Прочее</h2>
+            <ul class="resource-list">
+                <li><a href="https://globfone.com/call-phone" data-tooltip="Анонимные звонки"><i class="fas fa-phone"></i> Globfone</a></li>
+                <li><a href="https://t.me/FreeSafeCalls_Bot" data-tooltip="Анонимный звонок"><i class="fab fa-telegram"></i> FreeSafeCalls Bot</a></li>
+                <li><a href="https://www.textnow.com/" data-tooltip="Виртуальный номер"><i class="fas fa-phone-alt"></i> TextNow</a></li>
             </ul>
         </div>
     </div>
 
-    <button id="scrollTop">↑</button>
+    <button id="scrollTop" aria-label="Наверх">↑</button>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Частицы
+        // Инициализация частиц с улучшенной анимацией
         particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80 },
-                "color": { "value": "#bb86fc" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5 },
-                "size": { "value": 3 },
-                "move": { "speed": 2 }
+            particles: {
+                number: { value: 100 },
+                color: { value: "#bb86fc" },
+                shape: { type: "circle" },
+                opacity: { value: 0.6, random: true },
+                size: { value: 4, random: true },
+                move: { speed: 2.5, direction: "none", random: true }
+            },
+            interactivity: {
+                events: { onhover: { enable: true, mode: "repulse" } }
+            }
+        });
+
+        // Проверка загрузки категорий
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryFilter = document.getElementById('categoryFilter');
+            console.log('Количество категорий:', categoryFilter.options.length);
+            if (categoryFilter.options.length === 0) {
+                console.error('Список категорий пуст! Проверьте HTML или JavaScript.');
             }
         });
 
@@ -524,6 +767,15 @@
             });
         });
 
+        // Фильтр категорий
+        const categoryFilter = document.getElementById('categoryFilter');
+        categoryFilter.addEventListener('change', function() {
+            const selectedCategory = this.value;
+            document.querySelectorAll('.category').forEach(category => {
+                category.style.display = selectedCategory === 'all' || category.dataset.category === selectedCategory ? 'block' : 'none';
+            });
+        });
+
         // Сворачивание/разворачивание всех категорий
         const toggleAllBtn = document.getElementById('toggleAll');
         let allExpanded = false;
@@ -539,9 +791,93 @@
         document.querySelectorAll('.resource-list li a').forEach(link => {
             link.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
-                navigator.clipboard.writeText(link.href);
-                alert('Ссылка скопирована: ' + link.href);
+                navigator.clipboard.writeText(link.href).then(() => {
+                    alert('Ссылка скопирована: ' + link.href);
+                });
             });
+        });
+
+        // Избранное
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        document.querySelectorAll('.resource-list li a').forEach(link => {
+            const favoriteIcon = document.createElement('i');
+            favoriteIcon.className = 'fas fa-star';
+            favoriteIcon.style.cursor = 'pointer';
+            if (favorites.includes(link.href)) {
+                favoriteIcon.classList.add('favorite');
+            }
+            link.appendChild(favoriteIcon);
+            favoriteIcon.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (favorites.includes(link.href)) {
+                    favorites.splice(favorites.indexOf(link.href), 1);
+                    favoriteIcon.classList.remove('favorite');
+                } else {
+                    favorites.push(link.href);
+                    favoriteIcon.classList.add('favorite');
+                }
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            });
+        });
+
+        // Пагинация
+        const itemsPerPage = 10;
+        let currentPage = 1;
+
+        function paginate(category) {
+            const items = category.querySelectorAll('.resource-list li');
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+            items.forEach((item, index) => {
+                item.style.display = (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) ? 'block' : 'none';
+            });
+            updatePagination(totalPages, category);
+        }
+
+        function updatePagination(totalPages, category) {
+            let pagination = category.querySelector('.pagination');
+            if (!pagination) {
+                pagination = document.createElement('div');
+                pagination.className = 'pagination';
+                category.appendChild(pagination);
+            }
+            pagination.innerHTML = `
+                <button onclick="changePage(${currentPage - 1}, this.closest('.category'))" ${currentPage === 1 ? 'disabled' : ''}>Назад</button>
+                <span>Страница ${currentPage} из ${totalPages}</span>
+                <button onclick="changePage(${currentPage + 1}, this.closest('.category'))" ${currentPage === totalPages ? 'disabled' : ''}>Вперед</button>
+            `;
+        }
+
+        window.changePage = function(page, category) {
+            currentPage = page;
+            paginate(category);
+        };
+
+        document.querySelectorAll('.category').forEach(paginate);
+
+        // Экспорт списка
+        document.getElementById('exportList').addEventListener('click', () => {
+            const resources = [];
+            document.querySelectorAll('.category').forEach(category => {
+                const categoryName = category.querySelector('h2').textContent;
+                const items = [];
+                category.querySelectorAll('.resource-list li a').forEach(link => {
+                    items.push({
+                        name: link.textContent,
+                        url: link.href,
+                        tooltip: link.dataset.tooltip
+                    });
+                });
+                resources.push({ category: categoryName, items });
+            });
+            const json = JSON.stringify(resources, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'resources.json';
+            a.click();
+            URL.revokeObjectURL(url);
         });
 
         // Кнопка "Наверх"
@@ -552,10 +888,26 @@
         scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
         // Раскрытие категорий
-        function toggleList(header) {
+        window.toggleList = function(header) {
             const list = header.nextElementSibling;
             list.classList.toggle('active');
-        }
+            currentPage = 1;
+            paginate(header.parentElement);
+        };
+
+        // Ленивая загрузка категорий
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.category').forEach(category => {
+            observer.observe(category);
+        });
     </script>
 </body>
 </html>
